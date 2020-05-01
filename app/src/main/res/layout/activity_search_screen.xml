@@ -6,4 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".SearchScreen">
 
+    <EditText
+        android:id="@+id/searchCocktail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:id="@+id/recycler_drink"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
