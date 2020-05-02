@@ -50,4 +50,8 @@ dependencies {
     //RxJava
     implementation group: 'io.reactivex.rxjava2', name: 'rxjava', version: '2.2.19'
     implementation group: 'io.reactivex.rxjava2', name: 'rxandroid', version: '2.1.1'
+
+    //Glide
+    implementation group: 'com.github.bumptech.glide', name: 'glide', version: '4.11.0'
+
 }

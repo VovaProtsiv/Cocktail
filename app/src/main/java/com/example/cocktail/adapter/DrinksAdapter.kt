@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.cocktail.R
 
 class DrinksAdapter(internal val context: Context, internal var drinkList: List<Drink>) :
@@ -21,6 +22,10 @@ class DrinksAdapter(internal val context: Context, internal var drinkList: List<
 
     override fun onBindViewHolder(holder: DrinksViewHolder, position: Int) {
         holder.strDrink.text = drinkList[position].strDrink
+        Glide
+            .with(context)
+            .load(drinkList[position].strDrinkThumb)
+            .into(holder.strDrinkThumb);
 
     }
 

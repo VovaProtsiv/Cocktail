@@ -41,7 +41,7 @@ class SearchScreen : AppCompatActivity() {
                 val editText = findViewById<EditText>(R.id.searchCocktail)
                 val message = editText.text
 
-                jsonApi.drinkList("Mar").enqueue(object : Callback<ResultResponse> {
+                jsonApi.drinkList(editText.text.toString()).enqueue(object : Callback<ResultResponse> {
                     override fun onFailure(call: Call<ResultResponse>, t: Throwable) {
 
                     }
