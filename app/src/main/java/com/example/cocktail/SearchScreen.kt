@@ -1,9 +1,11 @@
 package com.example.cocktail
 
 import Drink
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
@@ -71,5 +73,10 @@ class SearchScreen : AppCompatActivity() {
     fun displayData(drinks: List<Drink>?) {
         val adapter = DrinksAdapter(this, drinks!!)
         recycler_drink.adapter = adapter
+    }
+
+    fun openDetails(view: View){
+        val intent = Intent(this, DetailsActivity::class.java)
+        startActivity(intent)
     }
 }
