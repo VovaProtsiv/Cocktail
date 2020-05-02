@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_search_screen.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-
+const val EXTRA_MESSAGE = "com.example.cocktail.Details"
 class SearchScreen : AppCompatActivity() {
 
     internal lateinit var jsonApi: ThecocktaildbApiService
@@ -77,6 +77,7 @@ class SearchScreen : AppCompatActivity() {
 
     fun openDetails(view: View){
         val intent = Intent(this, DetailsActivity::class.java)
+
         startActivity(intent)
     }
 }
