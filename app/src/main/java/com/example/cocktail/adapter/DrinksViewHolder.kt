@@ -9,4 +9,7 @@ class DrinksViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val strDrink = itemView.txt_strDrink
     val strDrinkThumb = itemView.drinkImg
 
+
+
+
 }

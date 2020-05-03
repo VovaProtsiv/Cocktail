@@ -9,7 +9,7 @@ import android.view.View
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.cocktail.adapter.DrinksAdapter
+import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
 import com.example.cocktailapp.model.ResultResponse
 import com.example.cocktailapp.retrofit.RetrofitClient
 import com.example.cocktailapp.retrofit.ThecocktaildbApiService
@@ -18,11 +18,15 @@ import kotlinx.android.synthetic.main.activity_search_screen.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-const val EXTRA_MESSAGE = "com.example.cocktail.Details"
-class SearchScreen : AppCompatActivity() {
+
+const val ID_DRINK = "com.example.cocktail.idDrink"
+const val DRINKS = "com.example.cocktail.Drinks"
+
+class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickListener{
 
     internal lateinit var jsonApi: ThecocktaildbApiService
     internal lateinit var compositeDisposable: CompositeDisposable
+    internal lateinit var adapter : DrinksRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,22 +47,22 @@ class SearchScreen : AppCompatActivity() {
                 val editText = findViewById<EditText>(R.id.searchCocktail)
                 val message = editText.text
 
-                jsonApi.drinkList(editText.text.toString()).enqueue(object : Callback<ResultResponse> {
-                    override fun onFailure(call: Call<ResultResponse>, t: Throwable) {
+                jsonApi.drinkList(editText.text.toString())
+                    .enqueue(object : Callback<ResultResponse> {
+                        override fun onFailure(call: Call<ResultResponse>, t: Throwable) {
 
-                    }
+                        }
 
-                    override fun onResponse(
-                        call: Call<ResultResponse>,
-                        response: Response<ResultResponse>
-                    ) {
-                        val strDrink = response.body()?.drinks?.get(0)?.strDrink
-                        displayData(response.body()?.drinks)
-                    }
+                        override fun onResponse(
+                            call: Call<ResultResponse>,
+                            response: Response<ResultResponse>
+                        ) {
+                            val drinks = response.body()?.drinks
+                            displayData(drinks)
 
-                })
+                        }
 
-
+                    })
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -71,13 +75,33 @@ class SearchScreen : AppCompatActivity() {
     }
 
     fun displayData(drinks: List<Drink>?) {
-        val adapter = DrinksAdapter(this, drinks!!)
+        adapter = DrinksRecyclerViewAdapter(this, drinks!!, this )
         recycler_drink.adapter = adapter
+
     }
-
-    fun openDetails(view: View){
-        val intent = Intent(this, DetailsActivity::class.java)
-
+    override fun onItemClick(view: View, position: Int) {
+        val intent = Intent(this,DetailsActivity::class.java)
+        val  bundle = Bundle()
+        bundle.putParcelable("listDrinks",adapter.drinkList[position])
+        intent.putExtras(bundle)
         startActivity(intent)
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
