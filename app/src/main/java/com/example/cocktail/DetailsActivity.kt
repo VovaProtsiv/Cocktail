@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
 import com.example.cocktail.adapter.IngredientsRecyclerViewAdapter
 import com.example.cocktail.adapter.MeasureRecyclerViewAdapter
+import com.example.cocktail.dao.App
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_search_screen.*
 import java.util.ArrayList
@@ -22,7 +23,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
         val bundle = intent.extras
-        val message = intent.getStringExtra(ID_DRINK)
+
        val sharedBookingObject = bundle!!.getParcelable<Drink>("listDrinks")
 
         Glide
@@ -83,7 +84,9 @@ class DetailsActivity : AppCompatActivity() {
         displayIngredient(listIngredient)
 
         findViewById<TextView>(R.id.instructions).apply { text= sharedBookingObject?.strInstructions}
-
+        if (sharedBookingObject != null) {
+            addDrink(sharedBookingObject)
+        }
     }
     fun displayIngredient(ingredient: List<String>?) {
        val adapter = IngredientsRecyclerViewAdapter(this, ingredient!! )
@@ -94,5 +97,9 @@ class DetailsActivity : AppCompatActivity() {
         val adapter = MeasureRecyclerViewAdapter( measure!! )
         recycler_measure.adapter = adapter
 
+    }
+
+    fun addDrink(newDrink : Drink){
+        App.instance?.getDatabase()
     }
 }
