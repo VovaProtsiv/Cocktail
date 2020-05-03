@@ -63,7 +63,7 @@ class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickL
                         }
 
                     })
-            }
+             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
