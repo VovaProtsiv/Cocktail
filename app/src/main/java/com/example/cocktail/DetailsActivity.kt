@@ -1,7 +1,9 @@
 package com.example.cocktail
 
 import Drink
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -9,13 +11,20 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.cocktail.adapter.IngredientsRecyclerViewAdapter
 import com.example.cocktail.adapter.MeasureRecyclerViewAdapter
-import com.example.cocktail.dao.App
+import com.example.cocktail.dao.DbHelper
+import com.example.cocktail.dao.DbHelper.Companion.DATABASE_NAME
+import com.example.cocktail.dao.DbHelper.Companion.DATABASE_VERSION
+import com.example.cocktail.dao.DbHelper.Companion.KEY_ID
+import com.example.cocktail.dao.DbHelper.Companion.KEY_IMAGE
+import com.example.cocktail.dao.DbHelper.Companion.KEY_NAME
+import com.example.cocktail.dao.DbHelper.Companion.TABLE_DRINKS
+
 import kotlinx.android.synthetic.main.activity_details.*
 import java.util.*
 
 
-class DetailsActivity : AppCompatActivity() {
-
+class DetailsActivity() : AppCompatActivity() {
+    internal lateinit var dbHelper: DbHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
@@ -81,9 +90,26 @@ class DetailsActivity : AppCompatActivity() {
         displayIngredient(listIngredient)
 
         findViewById<TextView>(R.id.instructions).apply { text= sharedBookingObject?.strInstructions}
-        if (sharedBookingObject != null) {
-            addDrink(sharedBookingObject)
+        dbHelper = DbHelper(this,DATABASE_NAME, DATABASE_VERSION)
+        val writableDatabase = dbHelper.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(KEY_ID,sharedBookingObject?.idDrink )
+        contentValues.put(KEY_NAME,sharedBookingObject?.strDrink )
+        contentValues.put(KEY_IMAGE,sharedBookingObject?.strDrinkThumb )
+        writableDatabase.insert(TABLE_DRINKS,null,contentValues)
+
+        val cursor = writableDatabase.query(TABLE_DRINKS, null, null, null, null, null, null)
+        Log.d("mlog","DataBase")
+        if (cursor.moveToFirst()){
+            val columnIndexID = cursor.getColumnIndex(KEY_ID)
+            val columnIndexName = cursor.getColumnIndex(KEY_NAME)
+            val columnIndexImage = cursor.getColumnIndex(KEY_IMAGE)
+            Log.d("mlog","id"+cursor.getString(columnIndexID))
+            Log.d("mlog","name"+cursor.getString(columnIndexName))
+            Log.d("mlog","image"+cursor.getString(columnIndexImage))
         }
+        cursor.close()
+
     }
     fun displayIngredient(ingredient: List<String>?) {
        val adapter = IngredientsRecyclerViewAdapter(this, ingredient!! )
@@ -96,7 +122,5 @@ class DetailsActivity : AppCompatActivity() {
 
     }
 
-    fun addDrink(newDrink : Drink){
-        App.instance?.getDatabase()
-    }
+
 }
