@@ -20,7 +20,6 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
 class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickListener{
 
     internal lateinit var jsonApi: ThecocktaildbApiService
