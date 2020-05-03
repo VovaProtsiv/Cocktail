@@ -14,8 +14,41 @@ import com.example.cocktail.adapter.MeasureRecyclerViewAdapter
 import com.example.cocktail.dao.DbHelper
 import com.example.cocktail.dao.DbHelper.Companion.DATABASE_NAME
 import com.example.cocktail.dao.DbHelper.Companion.DATABASE_VERSION
+import com.example.cocktail.dao.DbHelper.Companion.KEY_ALCOHOLIC
+import com.example.cocktail.dao.DbHelper.Companion.KEY_GLASS
 import com.example.cocktail.dao.DbHelper.Companion.KEY_ID
 import com.example.cocktail.dao.DbHelper.Companion.KEY_IMAGE
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT1
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT10
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT11
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT12
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT13
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT14
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT15
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT2
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT3
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT4
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT5
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT6
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT7
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT8
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INGREDIENT9
+import com.example.cocktail.dao.DbHelper.Companion.KEY_INSTRUCTIONS
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE1
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE10
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE11
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE12
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE13
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE14
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE15
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE2
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE3
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE4
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE5
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE6
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE7
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE8
+import com.example.cocktail.dao.DbHelper.Companion.KEY_MEASURE9
 import com.example.cocktail.dao.DbHelper.Companion.KEY_NAME
 import com.example.cocktail.dao.DbHelper.Companion.TABLE_DRINKS
 
@@ -91,24 +124,55 @@ class DetailsActivity() : AppCompatActivity() {
 
         findViewById<TextView>(R.id.instructions).apply { text= sharedBookingObject?.strInstructions}
         dbHelper = DbHelper(this,DATABASE_NAME, DATABASE_VERSION)
-        val writableDatabase = dbHelper.writableDatabase
+
+     val writableDatabase = dbHelper.writableDatabase
+     //writableDatabase.execSQL("drop table if exists $TABLE_DRINKS")
+
+
+
         val contentValues = ContentValues()
         contentValues.put(KEY_ID,sharedBookingObject?.idDrink )
         contentValues.put(KEY_NAME,sharedBookingObject?.strDrink )
         contentValues.put(KEY_IMAGE,sharedBookingObject?.strDrinkThumb )
-        writableDatabase.insert(TABLE_DRINKS,null,contentValues)
+        contentValues.put(KEY_ALCOHOLIC,sharedBookingObject?.strAlcoholic )
+        contentValues.put(KEY_GLASS,sharedBookingObject?.strGlass )
+        contentValues.put(KEY_INSTRUCTIONS,sharedBookingObject?.strInstructions )
+        contentValues.put(KEY_INGREDIENT1,sharedBookingObject?.strIngredient1 )
+        contentValues.put(KEY_INGREDIENT2,sharedBookingObject?.strIngredient2 )
+        contentValues.put(KEY_INGREDIENT3,sharedBookingObject?.strIngredient3 )
+        contentValues.put(KEY_INGREDIENT4,sharedBookingObject?.strIngredient4 )
+        contentValues.put(KEY_INGREDIENT5,sharedBookingObject?.strIngredient5 )
+        contentValues.put(KEY_INGREDIENT6,sharedBookingObject?.strIngredient6 )
+        contentValues.put(KEY_INGREDIENT7,sharedBookingObject?.strIngredient7 )
+        contentValues.put(KEY_INGREDIENT8,sharedBookingObject?.strIngredient8 )
+        contentValues.put(KEY_INGREDIENT9,sharedBookingObject?.strIngredient9 )
+        contentValues.put(KEY_INGREDIENT10,sharedBookingObject?.strIngredient10 )
+        contentValues.put(KEY_INGREDIENT11,sharedBookingObject?.strIngredient11 )
+        contentValues.put(KEY_INGREDIENT12,sharedBookingObject?.strIngredient12 )
+        contentValues.put(KEY_INGREDIENT13,sharedBookingObject?.strIngredient13 )
+        contentValues.put(KEY_INGREDIENT14,sharedBookingObject?.strIngredient14 )
+        contentValues.put(KEY_INGREDIENT15,sharedBookingObject?.strIngredient15 )
+        contentValues.put(KEY_MEASURE1,sharedBookingObject?.strMeasure1 )
+        contentValues.put(KEY_MEASURE2,sharedBookingObject?.strMeasure2 )
+        contentValues.put(KEY_MEASURE3,sharedBookingObject?.strMeasure3 )
+        contentValues.put(KEY_MEASURE4,sharedBookingObject?.strMeasure4 )
+        contentValues.put(KEY_MEASURE5,sharedBookingObject?.strMeasure5 )
+        contentValues.put(KEY_MEASURE6,sharedBookingObject?.strMeasure6 )
+        contentValues.put(KEY_MEASURE7,sharedBookingObject?.strMeasure7 )
+        contentValues.put(KEY_MEASURE8,sharedBookingObject?.strMeasure8 )
+        contentValues.put(KEY_MEASURE9,sharedBookingObject?.strMeasure9 )
+        contentValues.put(KEY_MEASURE10,sharedBookingObject?.strMeasure10 )
+        contentValues.put(KEY_MEASURE11,sharedBookingObject?.strMeasure11 )
+        contentValues.put(KEY_MEASURE12,sharedBookingObject?.strMeasure12 )
+        contentValues.put(KEY_MEASURE13,sharedBookingObject?.strMeasure13 )
+        contentValues.put(KEY_MEASURE14,sharedBookingObject?.strMeasure14 )
+        contentValues.put(KEY_MEASURE15,sharedBookingObject?.strMeasure15 )
 
-        val cursor = writableDatabase.query(TABLE_DRINKS, null, null, null, null, null, null)
-        Log.d("mlog","DataBase")
-        if (cursor.moveToFirst()){
-            val columnIndexID = cursor.getColumnIndex(KEY_ID)
-            val columnIndexName = cursor.getColumnIndex(KEY_NAME)
-            val columnIndexImage = cursor.getColumnIndex(KEY_IMAGE)
-            Log.d("mlog","id"+cursor.getString(columnIndexID))
-            Log.d("mlog","name"+cursor.getString(columnIndexName))
-            Log.d("mlog","image"+cursor.getString(columnIndexImage))
-        }
-        cursor.close()
+
+         writableDatabase.insert(TABLE_DRINKS, null, contentValues)
+
+
+
 
     }
     fun displayIngredient(ingredient: List<String>?) {

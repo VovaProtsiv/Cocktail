@@ -53,7 +53,14 @@ class DbHelper(context: Context, name: String, version: Int) :
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(
             "create table " + TABLE_DRINKS + "(" + KEY_ID + " text primary key," + KEY_NAME + " text,"
-                    + KEY_IMAGE + " text" + ")"
+                    + KEY_IMAGE + " text," + KEY_ALCOHOLIC + " text," +KEY_GLASS + " text," +KEY_INSTRUCTIONS + " text," +
+                    KEY_INGREDIENT1 + " text," +KEY_INGREDIENT2 + " text," +KEY_INGREDIENT3 + " text," +KEY_INGREDIENT4 + " text," +KEY_INGREDIENT5 + " text," +
+                    KEY_INGREDIENT6 + " text," +KEY_INGREDIENT7 + " text," +KEY_INGREDIENT8 + " text," +KEY_INGREDIENT9 + " text," +KEY_INGREDIENT10 + " text," +
+                    KEY_INGREDIENT11 + " text," +KEY_INGREDIENT12 + " text," +KEY_INGREDIENT13 + " text," +KEY_INGREDIENT14 + " text," +KEY_INGREDIENT15 + " text," +
+                    KEY_MEASURE1 + " text," +KEY_MEASURE2 + " text," +KEY_MEASURE3 + " text," +KEY_MEASURE4 + " text," +KEY_MEASURE5 + " text," +
+                    KEY_MEASURE6 + " text," +KEY_MEASURE7 + " text," +KEY_MEASURE8 + " text," +KEY_MEASURE9 + " text," +KEY_MEASURE10 + " text," +
+                    KEY_MEASURE11 + " text," +KEY_MEASURE12 + " text," +KEY_MEASURE13 + " text," +KEY_MEASURE14 + " text," +KEY_MEASURE15 + " text" +
+                    ")"
         )
     }
 
