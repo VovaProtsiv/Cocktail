@@ -109,7 +109,7 @@
             </androidx.recyclerview.widget.RecyclerView>
             <androidx.recyclerview.widget.RecyclerView
 
-                android:id="@+id/recycler_Measure"
+                android:id="@+id/recycler_measure"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 >

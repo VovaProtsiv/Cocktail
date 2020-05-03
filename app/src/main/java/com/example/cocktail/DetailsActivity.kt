@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
 import com.example.cocktail.adapter.IngredientsRecyclerViewAdapter
+import com.example.cocktail.adapter.MeasureRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_details.*
 import kotlinx.android.synthetic.main.activity_search_screen.*
 import java.util.ArrayList
@@ -37,6 +38,10 @@ class DetailsActivity : AppCompatActivity() {
 
         recycler_ingredients.setHasFixedSize(true)
         recycler_ingredients.layoutManager =LinearLayoutManager(this)
+
+        recycler_measure.setHasFixedSize(true)
+        recycler_measure.layoutManager =LinearLayoutManager(this)
+
         val listIngredient = ArrayList<String>()
 
         sharedBookingObject?.strIngredient1?.let { listIngredient.add(it) }
@@ -55,14 +60,39 @@ class DetailsActivity : AppCompatActivity() {
         sharedBookingObject?.strIngredient14?.let { listIngredient.add(it) }
         sharedBookingObject?.strIngredient15?.let { listIngredient.add(it) }
 
+        val listMeasure = ArrayList<String>()
 
+
+        sharedBookingObject?.strMeasure1?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure2?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure3?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure4?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure5?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure6?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure7?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure8?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure9?.let { listMeasure.add(it) }
+        sharedBookingObject?.strMeasure10?.let {listMeasure.add(it) }
+        sharedBookingObject?.strMeasure11?.let {listMeasure.add(it) }
+        sharedBookingObject?.strMeasure12?.let {listMeasure.add(it) }
+        sharedBookingObject?.strMeasure13?.let {listMeasure.add(it) }
+        sharedBookingObject?.strMeasure14?.let {listMeasure.add(it) }
+        sharedBookingObject?.strMeasure15?.let {listMeasure.add(it) }
+
+        displayMeasure(listMeasure)
         displayIngredient(listIngredient)
+
         findViewById<TextView>(R.id.instructions).apply { text= sharedBookingObject?.strInstructions}
 
     }
     fun displayIngredient(ingredient: List<String>?) {
        val adapter = IngredientsRecyclerViewAdapter(this, ingredient!! )
         recycler_ingredients.adapter = adapter
+
+    }
+    fun displayMeasure(measure: List<String>?) {
+        val adapter = MeasureRecyclerViewAdapter( measure!! )
+        recycler_measure.adapter = adapter
 
     }
 }
