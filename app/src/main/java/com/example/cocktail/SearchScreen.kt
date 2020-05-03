@@ -19,8 +19,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-const val ID_DRINK = "com.example.cocktail.idDrink"
-const val DRINKS = "com.example.cocktail.Drinks"
+
 
 class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickListener{
 

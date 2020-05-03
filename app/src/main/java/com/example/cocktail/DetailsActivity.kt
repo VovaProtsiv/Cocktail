@@ -1,20 +1,17 @@
 package com.example.cocktail
 
 import Drink
-
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
 import com.example.cocktail.adapter.IngredientsRecyclerViewAdapter
 import com.example.cocktail.adapter.MeasureRecyclerViewAdapter
 import com.example.cocktail.dao.App
 import kotlinx.android.synthetic.main.activity_details.*
-import kotlinx.android.synthetic.main.activity_search_screen.*
-import java.util.ArrayList
+import java.util.*
 
 
 class DetailsActivity : AppCompatActivity() {
