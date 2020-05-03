@@ -37,7 +37,7 @@ class DrinksRecyclerViewAdapter(
         Glide
             .with(context)
             .load(drinkList[position].strDrinkThumb)
-            .into(holder.strDrinkThumb);
+            .into(holder.strDrinkThumb)
     }
 
      inner class DrinkViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
