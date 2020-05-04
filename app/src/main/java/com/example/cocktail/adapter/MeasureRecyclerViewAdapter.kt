@@ -1,14 +1,11 @@
 package com.example.cocktail.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cocktail.R
-
-import kotlinx.android.synthetic.main.ingredient_layout.view.*
 import kotlinx.android.synthetic.main.measure_layout.view.*
 
 class MeasureRecyclerViewAdapter(

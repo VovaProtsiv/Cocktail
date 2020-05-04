@@ -24,7 +24,7 @@ class DrinksRecyclerViewAdapter(
 
         val itemView = LayoutInflater.from(parent.context)
             .inflate(R.layout.drinks_layout, parent, false)
-                return DrinkViewHolder(itemView)
+        return DrinkViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -40,23 +40,23 @@ class DrinksRecyclerViewAdapter(
             .into(holder.strDrinkThumb)
     }
 
-     inner class DrinkViewHolder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView),
+    inner class DrinkViewHolder internal constructor(itemView: View) :
+        RecyclerView.ViewHolder(itemView),
         View.OnClickListener {
-        val strDrink : TextView
-        val strDrinkThumb : ImageView
+        val strDrink: TextView
+        val strDrinkThumb: ImageView
 
 
         override fun onClick(v: View) {
-            //if (mClickListener != null) mClickListener.onItemClick(view, getAdapterPosition());
-
             mClickListener.onItemClick(v, adapterPosition)
 
         }
-         init {
-              strDrink = itemView.txt_strDrink
-             strDrinkThumb = itemView.drinkImg
-             itemView.setOnClickListener(this)
-         }
+
+        init {
+            strDrink = itemView.txt_strDrink
+            strDrinkThumb = itemView.drinkImg
+            itemView.setOnClickListener(this)
+        }
     }
 
 

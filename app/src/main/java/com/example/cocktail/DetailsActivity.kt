@@ -201,7 +201,7 @@ class DetailsActivity() : AppCompatActivity() {
     }
 
     fun displayIngredient(ingredient: List<String>?) {
-        val adapter = IngredientsRecyclerViewAdapter(this, ingredient!!)
+        val adapter = IngredientsRecyclerViewAdapter( ingredient!!)
         recycler_ingredients.adapter = adapter
 
     }
