@@ -44,9 +44,14 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
 
         searchCocktail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+
                 val editText = findViewById<EditText>(R.id.searchCocktail)
                 val message = editText.text
-
+                if (s.isNullOrEmpty()){
+                    displayData(null)
+                    findViewById<TextView>(R.id.text_help_search_screen).apply{text = "Enter text to start search"}
+                    return
+                }
                 jsonApi.drinkList(editText.text.toString())
                     .enqueue(object : Callback<ResultResponse> {
                         override fun onFailure(call: Call<ResultResponse>, t: Throwable) {
@@ -54,19 +59,20 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
                         }
 
                         override fun onResponse(
-                            call: Call<ResultResponse>,
+                            call: Call<ResultResponse>, 
                             response: Response<ResultResponse>
                         ) {
                             val drinks = response.body()?.drinks
+
                             if (drinks != null) {
                                 displayData(drinks)
                             } else {
                                 displayData(null)
                                 findViewById<TextView>(R.id.text_help_search_screen).apply {
                                     text = "No cocktails found"
-                                }
-                            }
 
+                            }
+}
 
                         }
 
