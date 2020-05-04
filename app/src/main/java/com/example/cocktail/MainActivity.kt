@@ -83,20 +83,12 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
     fun readDb(writableDatabase: SQLiteDatabase): ArrayList<Drink> {
         val cursor = writableDatabase.query(TABLE_DRINKS, null, null, null, null, null, null)
         var listDrink = ArrayList<Drink>()
-        Log.d("read", "dsdsdsdsd")
-        //writableDatabase.delete(TABLE_DRINKS, null, null)
         if (cursor.moveToFirst()) {
-            Log.d("start", cursor.count.toString())
             val columnIndexID = cursor.getColumnIndex(DbHelper.KEY_ID)
-
             val columnIndexNAME = cursor.getColumnIndex(DbHelper.KEY_NAME)
-
             val columnIndexIMAGE = cursor.getColumnIndex(DbHelper.KEY_IMAGE)
-
             val columnIndexALCOHOLIC = cursor.getColumnIndex(DbHelper.KEY_ALCOHOLIC)
-
             val columnIndexGLASS = cursor.getColumnIndex(DbHelper.KEY_GLASS)
-            Log.d("columnIndexGLASS", columnIndexGLASS.toString())
             val columnIndexINSTRUCTIONS = cursor.getColumnIndex(DbHelper.KEY_INSTRUCTIONS)
             val columnIndexINGREDIENT1 = cursor.getColumnIndex(DbHelper.KEY_INGREDIENT1)
             val columnIndexINGREDIENT2 = cursor.getColumnIndex(DbHelper.KEY_INGREDIENT2)
@@ -128,7 +120,6 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
             val columnIndexMEASURE13 = cursor.getColumnIndex(DbHelper.KEY_MEASURE13)
             val columnIndexMEASURE14 = cursor.getColumnIndex(DbHelper.KEY_MEASURE14)
             val columnIndexMEASURE15 = cursor.getColumnIndex(DbHelper.KEY_MEASURE15)
-            Log.d("end", cursor.count.toString())
             do {
                 val drink = Drink(
                     cursor.getString(columnIndexID),
