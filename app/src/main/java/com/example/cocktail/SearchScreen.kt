@@ -5,8 +5,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
@@ -20,11 +22,11 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickListener{
+class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickListener {
 
     internal lateinit var jsonApi: ThecocktaildbApiService
     internal lateinit var compositeDisposable: CompositeDisposable
-    internal lateinit var adapter : DrinksRecyclerViewAdapter
+    internal lateinit var adapter: DrinksRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,12 +58,20 @@ class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickL
                             response: Response<ResultResponse>
                         ) {
                             val drinks = response.body()?.drinks
-                            displayData(drinks)
+                            if (drinks != null) {
+                                displayData(drinks)
+                            } else {
+                                displayData(null)
+                                findViewById<TextView>(R.id.text_help_search_screen).apply {
+                                    text = "No cocktails found"
+                                }
+                            }
+
 
                         }
 
                     })
-             }
+            }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
@@ -73,14 +83,19 @@ class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickL
     }
 
     fun displayData(drinks: List<Drink>?) {
-        adapter = DrinksRecyclerViewAdapter(this, drinks!!, this )
-        recycler_drink.adapter = adapter
+        if (drinks == null) {
+            recycler_drink.adapter = null
+        } else {
+            adapter = DrinksRecyclerViewAdapter(this, drinks!!, this)
+            recycler_drink.adapter = adapter
+        }
 
     }
+
     override fun onItemClick(view: View, position: Int) {
-        val intent = Intent(this,DetailsActivity::class.java)
-        val  bundle = Bundle()
-        bundle.putParcelable("listDrinks",adapter.drinkList[position])
+        val intent = Intent(this, DetailsActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable("listDrinks", adapter.drinkList[position])
         intent.putExtras(bundle)
         startActivity(intent)
     }
