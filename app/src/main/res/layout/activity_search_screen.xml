@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorSplash"
     tools:context=".SearchScreen">
 
     <LinearLayout
@@ -18,7 +19,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-
+        android:background="@drawable/search_360_dp"
+        android:paddingLeft="40dp"
+        android:drawableLeft="@drawable/search"
         />
 
     <androidx.recyclerview.widget.RecyclerView
