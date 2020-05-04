@@ -5,12 +5,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.cocktail.adapter.DrinksRecyclerViewAdapter
 import com.example.cocktail.dao.DbHelper
 import com.example.cocktail.dao.DbHelper.Companion.TABLE_DRINKS
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_search_screen.*
 
 class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickListener {
     internal lateinit var adapter: DrinksRecyclerViewAdapter
@@ -21,17 +23,17 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         setContentView(R.layout.activity_main)
         listDrink = ArrayList<Drink>()
 
-       // main_recycler_drink.setHasFixedSize(true)
+
         main_recycler_drink.layoutManager = GridLayoutManager(this, 2)
 
         dbHelper = DbHelper(this, DbHelper.DATABASE_NAME, DbHelper.DATABASE_VERSION)
         val writableDatabase = dbHelper.writableDatabase
         //writableDatabase.execSQL("drop table if exists $TABLE_DRINKS")
-       //dbHelper.onCreate(writableDatabase)
+        //dbHelper.onCreate(writableDatabase)
         val cursor = writableDatabase.query(TABLE_DRINKS, null, null, null, null, null, null)
 
-        //writableDatabase.delete(TABLE_DRINKS,null,null)
-        if (cursor.moveToFirst()  ) {
+        //writableDatabase.delete(TABLE_DRINKS, null, null)
+        if (cursor.moveToFirst()) {
             Log.d("start", cursor.count.toString())
             val columnIndexID = cursor.getColumnIndex(DbHelper.KEY_ID)
 
@@ -136,9 +138,12 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         }
 
         cursor.close()
-if(listDrink.isNotEmpty()) {
-    displayData(listDrink)
-}
+        if (listDrink.isNotEmpty()) {
+            displayData(listDrink)
+        } else {
+            displayData(null)
+            findViewById<TextView>(R.id.text_history_main).apply { text = "History is empty" }
+        }
     }
 
     fun changeActivity(view: View) {
@@ -147,9 +152,12 @@ if(listDrink.isNotEmpty()) {
     }
 
     fun displayData(drinks: List<Drink>?) {
-        adapter = DrinksRecyclerViewAdapter(this, drinks!!, this)
-        main_recycler_drink.adapter = adapter
-
+        if (drinks == null) {
+            main_recycler_drink.adapter = null
+        } else {
+            adapter = DrinksRecyclerViewAdapter(this, drinks!!, this)
+            main_recycler_drink.adapter = adapter
+        }
     }
 
     override fun onItemClick(view: View, position: Int) {
