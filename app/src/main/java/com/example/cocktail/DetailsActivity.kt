@@ -62,10 +62,12 @@ class DetailsActivity() : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_details)
+        setSupportActionBar(findViewById(R.id.toolbarDetails))
+
         val bundle = intent.extras
 
         val sharedBookingObject = bundle!!.getParcelable<Drink>("listDrinks")
-
+        title=sharedBookingObject?.strDrink
         Glide
             .with(this)
             .load(sharedBookingObject?.strDrinkThumb)

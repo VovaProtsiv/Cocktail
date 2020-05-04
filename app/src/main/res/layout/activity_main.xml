@@ -7,16 +7,24 @@
     android:background="@color/colorSplash"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:title="@string/app_name"
+        app:titleMarginStart="72dp"
+        style="@style/Toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/main_recycler_drink"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 
     <ImageButton
         android:id="@+id/imageButton"

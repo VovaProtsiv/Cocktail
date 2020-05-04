@@ -32,7 +32,8 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_screen)
 
-        //init API
+
+                        //init API
         val retrofit = RetrofitClient.instance
         jsonApi = retrofit.create(ThecocktaildbApiService::class.java)
 
@@ -47,9 +48,11 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
 
                 val editText = findViewById<EditText>(R.id.searchCocktail)
                 val message = editText.text
-                if (s.isNullOrEmpty()){
+                if (s.isNullOrEmpty()) {
                     displayData(null)
-                    findViewById<TextView>(R.id.text_help_search_screen).apply{text = "Enter text to start search"}
+                    findViewById<TextView>(R.id.text_help_search_screen).apply {
+                        text = "Enter text to start search"
+                    }
                     return
                 }
                 jsonApi.drinkList(editText.text.toString())
@@ -59,7 +62,7 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
                         }
 
                         override fun onResponse(
-                            call: Call<ResultResponse>, 
+                            call: Call<ResultResponse>,
                             response: Response<ResultResponse>
                         ) {
                             val drinks = response.body()?.drinks
@@ -71,8 +74,8 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
                                 findViewById<TextView>(R.id.text_help_search_screen).apply {
                                     text = "No cocktails found"
 
+                                }
                             }
-}
 
                         }
 
