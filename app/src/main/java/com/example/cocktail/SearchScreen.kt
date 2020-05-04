@@ -36,7 +36,7 @@ class SearchScreen : AppCompatActivity(),  DrinksRecyclerViewAdapter.DrinkClickL
 
         compositeDisposable = CompositeDisposable()
         //view
-        recycler_drink.setHasFixedSize(true)
+        //recycler_drink.setHasFixedSize(true)
         recycler_drink.layoutManager = GridLayoutManager(this, 2)
 
 

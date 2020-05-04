@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".SearchScreen">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
     <EditText
         android:id="@+id/searchCocktail"
         android:layout_width="match_parent"
@@ -19,7 +25,8 @@
 
         android:id="@+id/recycler_drink"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
     </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

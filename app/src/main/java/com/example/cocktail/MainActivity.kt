@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         setContentView(R.layout.activity_main)
         listDrink = ArrayList<Drink>()
 
-        main_recycler_drink.setHasFixedSize(true)
+       // main_recycler_drink.setHasFixedSize(true)
         main_recycler_drink.layoutManager = GridLayoutManager(this, 2)
 
         dbHelper = DbHelper(this, DbHelper.DATABASE_NAME, DbHelper.DATABASE_VERSION)
