@@ -68,6 +68,9 @@ class DetailsActivity() : AppCompatActivity() {
 
         val sharedBookingObject = bundle!!.getParcelable<Drink>("listDrinks")
         title=sharedBookingObject?.strDrink
+
+        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         Glide
             .with(this)
             .load(sharedBookingObject?.strDrinkThumb)
