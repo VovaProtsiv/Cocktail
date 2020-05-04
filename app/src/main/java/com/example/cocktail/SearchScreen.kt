@@ -36,7 +36,7 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
 
         compositeDisposable = CompositeDisposable()
         //view
-        //recycler_drink.setHasFixedSize(true)
+        recycler_drink.setHasFixedSize(true)
         recycler_drink.layoutManager = GridLayoutManager(this, 2)
 
 
@@ -52,6 +52,7 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
                     }
                     return
                 }
+
                 jsonApi.drinkList(editText.text.toString())
                     .enqueue(object : Callback<ResultResponse> {
                         override fun onFailure(call: Call<ResultResponse>, t: Throwable) {
@@ -63,19 +64,8 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
                             response: Response<ResultResponse>
                         ) {
                             val drinks = response.body()?.drinks
-
-                            if (drinks != null) {
-                                displayData(drinks)
-                            } else {
-                                displayData(null)
-                                findViewById<TextView>(R.id.text_help_search_screen).apply {
-                                    text = "No cocktails found"
-
-                                }
-                            }
-
+                            displayData(drinks)
                         }
-
                     })
             }
 
@@ -91,6 +81,9 @@ class SearchScreen : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
     fun displayData(drinks: List<Drink>?) {
         if (drinks == null) {
             recycler_drink.adapter = null
+            findViewById<TextView>(R.id.text_help_search_screen).apply {
+                text = "No cocktails found"
+            }
         } else {
             adapter = DrinksRecyclerViewAdapter(this, drinks!!, this)
             recycler_drink.adapter = adapter

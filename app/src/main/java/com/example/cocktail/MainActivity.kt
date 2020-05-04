@@ -17,24 +17,22 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_search_screen.*
 
 class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickListener {
+
     internal lateinit var adapter: DrinksRecyclerViewAdapter
     internal lateinit var dbHelper: DbHelper
-    //internal lateinit var listDrink: ArrayList<Drink>
     internal lateinit var writableDatabase: SQLiteDatabase
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        //listDrink = ArrayList<Drink>()
-
-
         main_recycler_drink.layoutManager = GridLayoutManager(this, 2)
         main_recycler_drink.setHasFixedSize(true)
 
         dbHelper = DbHelper(this, DbHelper.DATABASE_NAME, DbHelper.DATABASE_VERSION)
-         writableDatabase = dbHelper.writableDatabase
-       writableDatabase.delete(TABLE_DRINKS,null,null)
+        writableDatabase = dbHelper.writableDatabase
+       //writableDatabase.delete(TABLE_DRINKS,null,null)
         //writableDatabase.execSQL("drop table if exists $TABLE_DRINKS")
         //dbHelper.onCreate(writableDatabase)
 
@@ -42,14 +40,10 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
 
         if (listDrink.isNotEmpty()) {
             displayData(listDrink)
-
         } else {
             displayData(null)
-            Log.d("else", "null")
-            findViewById<TextView>(R.id.text_history_main).apply { text = "History is empty" }
         }
     }
-
 
     fun changeActivity(view: View) {
         val intent = Intent(this, SearchScreen::class.java)
@@ -59,6 +53,7 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
     fun displayData(drinks: List<Drink>?) {
         if (drinks == null) {
             main_recycler_drink.adapter = null
+            findViewById<TextView>(R.id.text_history_main).apply { text = "History is empty" }
         } else {
             adapter = DrinksRecyclerViewAdapter(this, drinks!!, this)
             main_recycler_drink.adapter = adapter
@@ -67,17 +62,14 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
 
     override fun onRestart() {
         super.onRestart()
-        Log.d("res","restart")
         if (readDb(writableDatabase).isNotEmpty()) {
             displayData(readDb(writableDatabase))
-            findViewById<TextView>(R.id.text_history_main).text=""
+            findViewById<TextView>(R.id.text_history_main).text = ""
         } else {
             displayData(null)
-            Log.d("elseres", "null")
-            findViewById<TextView>(R.id.text_history_main).apply { text = "History is empty" }
         }
 
-       // displayData(listDrink)
+        // displayData(listDrink)
     }
 
     override fun onItemClick(view: View, position: Int) {
@@ -88,10 +80,10 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         startActivity(intent)
     }
 
-    fun readDb( writableDatabase :SQLiteDatabase ) : ArrayList<Drink>{
+    fun readDb(writableDatabase: SQLiteDatabase): ArrayList<Drink> {
         val cursor = writableDatabase.query(TABLE_DRINKS, null, null, null, null, null, null)
         var listDrink = ArrayList<Drink>()
-        Log.d("read","dsdsdsdsd")
+        Log.d("read", "dsdsdsdsd")
         //writableDatabase.delete(TABLE_DRINKS, null, null)
         if (cursor.moveToFirst()) {
             Log.d("start", cursor.count.toString())
@@ -200,7 +192,6 @@ class MainActivity : AppCompatActivity(), DrinksRecyclerViewAdapter.DrinkClickLi
         cursor.close()
         return listDrink
     }
-
 
 
 }
